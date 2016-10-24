@@ -2,27 +2,75 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>llRandomNumber</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>// 判断邮箱格式是否正确
-func isValidEmail(email: String) -&gt; Bool {
-    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-    let emailTest = NSPredicate(format: "SELF MATCHES%@", emailRegex)
-    
-    return emailTest.evaluateWithObject(email)
+	<string>/**
+ 产生不重复的随机数
+
+ 使用
+ var A = Random.number(5)
+ print(A)   // [4, 2, 3, 5, 1]
+ A = Random.number(5)
+ print(A)   // [4, 5, 2, 1, 3]
+
+
+ var Apro = Random.numberPro(10, end: 20)
+ print(Apro)  // [20, 12, 17, 13, 16, 15, 14, 19, 11, 18]
+ Apro = Random.numberPro(10, end: 20)
+ print(Apro)  // [20, 17, 16, 18, 15, 14, 13, 11, 19, 12]
+
+
+ */
+
+struct Random {
+
+    /**
+     * 如区间表示 ==&gt; [1, end]
+     */
+    static func number(end: Int) -&gt; [Int] {
+        var startArr = Array(1...end)
+        var resultArr = Array(count: end, repeatedValue: 0)
+        for i in 0..&lt;startArr.count {
+            let currentCount = UInt32(startArr.count - i)
+            let index = Int(arc4random_uniform(currentCount))
+            resultArr[i] = startArr[index]
+            startArr[index] = startArr[Int(currentCount) - 1]
+        }
+        return resultArr
+    }
+
+    /**
+     *  如半闭区间表示 ==&gt; (start, end]
+     */
+    static func numberPro(start: Int, end: Int) -&gt; [Int] {
+        let scope = end - start
+        var startArr = Array(1...scope)
+        var resultArr = Array(count: scope, repeatedValue: 0)
+        for i in 0..&lt;startArr.count {
+            let currentCount = UInt32(startArr.count - i)
+            let index = Int(arc4random_uniform(currentCount))
+            resultArr[i] = startArr[index]
+            startArr[index] = startArr[Int(currentCount) - 1]
+        }
+        return resultArr.map { $0 + start }
+    }
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>D28589FD-2241-4504-AD14-5291BFBB0BB6</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>产生不重复的随机数</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>My Code Snippet</string>
+	<string>RandomNumber</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>0</integer>
+	<integer>2</integer>
 </dict>
 </plist>

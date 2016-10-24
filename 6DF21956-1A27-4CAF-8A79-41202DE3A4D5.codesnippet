@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>mytavleview</string>
+	<string>llMytavleview</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>TopLevel</string>
@@ -33,6 +33,8 @@ func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSInde
 	<string>6DF21956-1A27-4CAF-8A79-41202DE3A4D5</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>TableView相关</string>
 	<key>IDECodeSnippetTitle</key>
 	<string>TableView Methods</string>
 	<key>IDECodeSnippetUserSnippet</key>
